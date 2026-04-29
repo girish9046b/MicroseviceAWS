@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: discovery 
-          image: acrr11.azurecr.io/discoveryserver.git:#{Build.BuildId}#
+          image: acrr11.azurecr.io/discoveryserver.git:latest
           ports:
           - containerPort: 8080
 
