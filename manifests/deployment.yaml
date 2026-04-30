@@ -17,4 +17,13 @@ spec:
           image: acrr11.azurecr.io/discoveryserver.git:latest
           ports:
           - containerPort: 80
- 
+
+kind: Service
+metadata:
+    name: discovery
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 80 
+    selector:
+        app: discovery
