@@ -1,0 +1,370 @@
+{
+  "options": [
+    {
+      "enabled": true,
+      "definition": {
+        "id": "5d58cc01-7c75-450c-be18-a388ddb129ec"
+      },
+      "inputs": {
+        "branchFilters": "[\"+refs/heads/*\"]",
+        "additionalFields": "{}"
+      }
+    },
+    {
+      "enabled": false,
+      "definition": {
+        "id": "a9db38f9-9fdc-478c-b0f9-464221e58316"
+      },
+      "inputs": {
+        "workItemType": "Issue",
+        "assignToRequestor": "true",
+        "additionalFields": "{}"
+      }
+    }
+  ],
+  "triggers": [
+    {
+      "branchFilters": [
+        "+refs/heads/master"
+      ],
+      "pathFilters": [],
+      "batchChanges": false,
+      "maxConcurrentBuildsPerBranch": 1,
+      "pollingInterval": 0,
+      "triggerType": 2
+    }
+  ],
+  "variables": {
+    "system.debug": {
+      "value": "false",
+      "allowOverride": true
+    }
+  },
+  "properties": {},
+  "tags": [],
+  "_links": {
+    "self": {
+      "href": "https://dev.azure.com/sirisha9046martham/04217cd0-9129-4750-afec-d6c703a2bd7c/_apis/build/Definitions/2?revision=7"
+    },
+    "web": {
+      "href": "https://dev.azure.com/sirisha9046martham/04217cd0-9129-4750-afec-d6c703a2bd7c/_build/definition?definitionId=2"
+    },
+    "editor": {
+      "href": "https://dev.azure.com/sirisha9046martham/04217cd0-9129-4750-afec-d6c703a2bd7c/_build/designer?id=2&_a=edit-build-definition"
+    },
+    "badge": {
+      "href": "https://dev.azure.com/sirisha9046martham/04217cd0-9129-4750-afec-d6c703a2bd7c/_apis/build/status/2"
+    }
+  },
+  "buildNumberFormat": "$(date:yyyyMMdd)$(rev:.r)",
+  "jobAuthorizationScope": 2,
+  "jobTimeoutInMinutes": 60,
+  "jobCancelTimeoutInMinutes": 5,
+  "process": {
+    "phases": [
+      {
+        "steps": [
+          {
+            "environment": {},
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Maven pom.xml",
+            "timeoutInMinutes": 0,
+            "retryCountOnTaskFailure": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "ac4ee482-65da-4485-a532-7b085873e532",
+              "versionSpec": "4.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "ConnectedServiceName": "949b0e47-55be-49da-9b7a-7aa82301bdcb",
+              "mavenPOMFile": "pom.xml",
+              "goals": "package",
+              "options": "",
+              "publishJUnitResults": "true",
+              "testResultsFiles": "**/surefire-reports/TEST-*.xml",
+              "testRunTitle": "",
+              "allowBrokenSymbolicLinks": "true",
+              "codeCoverageTool": "None",
+              "classFilter": "",
+              "classFilesDirectories": "",
+              "srcDirectories": "",
+              "failIfCoverageEmpty": "false",
+              "restoreOriginalPomXml": "false",
+              "javaHomeSelection": "JDKVersion",
+              "jdkVersion": "default",
+              "jdkUserInputPath": "",
+              "jdkArchitecture": "x64",
+              "mavenVersionSelection": "Default",
+              "mavenPath": "",
+              "mavenSetM2Home": "false",
+              "mavenOpts": "-Xmx1024m",
+              "mavenFeedAuthenticate": "false",
+              "skipEffectivePom": "false",
+              "sqAnalysisEnabled": "false",
+              "isJacocoCoverageReportXML": "false",
+              "sqMavenPluginVersionChoice": "latest",
+              "checkstyleAnalysisEnabled": "false",
+              "pmdAnalysisEnabled": "false",
+              "findbugsAnalysisEnabled": "false",
+              "spotBugsAnalysisEnabled": "false",
+              "spotBugsMavenPluginVersion": "4.5.3.0",
+              "spotBugsGoal": "spotbugs",
+              "spotBugsFailWhenBugsFound": "true"
+            }
+          },
+          {
+            "environment": {},
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Build an image",
+            "timeoutInMinutes": 0,
+            "retryCountOnTaskFailure": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "e28912f1-0114-4464-802a-a3a35437fd16",
+              "versionSpec": "0.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "containerregistrytype": "Azure Container Registry",
+              "dockerRegistryEndpoint": "",
+              "azureSubscriptionEndpoint": "949b0e47-55be-49da-9b7a-7aa82301bdcb",
+              "azureContainerRegistry": "{\"loginServer\":\"acrr11.azurecr.io\", \"id\" : \"/subscriptions/9121b710-22fb-4465-b49b-7b4fcf9a17b5/resourceGroups/resourcegroup-11/providers/Microsoft.ContainerRegistry/registries/acrr11\"}",
+              "action": "Build an image",
+              "dockerFile": "**/Dockerfile",
+              "addBaseImageData": "true",
+              "buildArguments": "",
+              "defaultContext": "true",
+              "context": "",
+              "imageName": "$(Build.Repository.Name):$(Build.BuildId)",
+              "imageNamesPath": "",
+              "qualifyImageName": "true",
+              "additionalImageTags": "",
+              "includeSourceTags": "false",
+              "includeLatestTag": "true",
+              "imageDigestFile": "",
+              "containerName": "",
+              "ports": "",
+              "volumes": "",
+              "envVars": "",
+              "workDir": "",
+              "entrypoint": "",
+              "containerCommand": "",
+              "detached": "true",
+              "restartPolicy": "no",
+              "restartMaxRetries": "",
+              "customCommand": "",
+              "dockerHostEndpoint": "",
+              "enforceDockerNamingConvention": "true",
+              "cwd": "$(System.DefaultWorkingDirectory)",
+              "memory": ""
+            }
+          },
+          {
+            "environment": {},
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Push an image",
+            "timeoutInMinutes": 0,
+            "retryCountOnTaskFailure": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "e28912f1-0114-4464-802a-a3a35437fd16",
+              "versionSpec": "0.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "containerregistrytype": "Azure Container Registry",
+              "dockerRegistryEndpoint": "",
+              "azureSubscriptionEndpoint": "949b0e47-55be-49da-9b7a-7aa82301bdcb",
+              "azureContainerRegistry": "{\"loginServer\":\"acrr11.azurecr.io\", \"id\" : \"/subscriptions/9121b710-22fb-4465-b49b-7b4fcf9a17b5/resourceGroups/resourcegroup-11/providers/Microsoft.ContainerRegistry/registries/acrr11\"}",
+              "action": "Push an image",
+              "dockerFile": "**/Dockerfile",
+              "addBaseImageData": "true",
+              "buildArguments": "",
+              "defaultContext": "true",
+              "context": "",
+              "imageName": "$(Build.Repository.Name):$(Build.BuildId)",
+              "imageNamesPath": "",
+              "qualifyImageName": "true",
+              "additionalImageTags": "",
+              "includeSourceTags": "false",
+              "includeLatestTag": "true",
+              "imageDigestFile": "",
+              "containerName": "",
+              "ports": "",
+              "volumes": "",
+              "envVars": "",
+              "workDir": "",
+              "entrypoint": "",
+              "containerCommand": "",
+              "detached": "true",
+              "restartPolicy": "no",
+              "restartMaxRetries": "",
+              "customCommand": "",
+              "dockerHostEndpoint": "",
+              "enforceDockerNamingConvention": "true",
+              "cwd": "$(System.DefaultWorkingDirectory)",
+              "memory": ""
+            }
+          },
+          {
+            "environment": {},
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Copy Files to: $(build.artifactstagingdirectory)",
+            "timeoutInMinutes": 0,
+            "retryCountOnTaskFailure": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "5bfb729a-a7c8-4a78-a7c3-8d717bb7c13c",
+              "versionSpec": "2.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "SourceFolder": "manifests",
+              "Contents": "**/*.yaml",
+              "TargetFolder": "$(build.artifactstagingdirectory)",
+              "CleanTargetFolder": "false",
+              "OverWrite": "false",
+              "flattenFolders": "false",
+              "preserveTimestamp": "false",
+              "retryCount": "0",
+              "delayBetweenRetries": "1000",
+              "ignoreMakeDirErrors": "false"
+            }
+          },
+          {
+            "environment": {},
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Publish Artifact: drop",
+            "timeoutInMinutes": 0,
+            "retryCountOnTaskFailure": 0,
+            "condition": "succeeded()",
+            "task": {
+              "id": "2ff763a7-ce83-4e1f-bc89-0ae63477cebe",
+              "versionSpec": "1.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "PathtoPublish": "$(Build.ArtifactStagingDirectory)",
+              "ArtifactName": "drop",
+              "ArtifactType": "Container",
+              "MaxArtifactSize": "0",
+              "TargetPath": "",
+              "Parallel": "false",
+              "ParallelCount": "8",
+              "StoreAsTar": "false"
+            }
+          }
+        ],
+        "name": "Agent job 1",
+        "refName": "Job_1",
+        "condition": "succeeded()",
+        "target": {
+          "queue": {
+            "_links": {
+              "self": {
+                "href": "https://dev.azure.com/sirisha9046martham/_apis/build/Queues/9"
+              }
+            },
+            "id": 9,
+            "url": "https://dev.azure.com/sirisha9046martham/_apis/build/Queues/9",
+            "pool": null
+          },
+          "agentSpecification": {
+            "identifier": "ubuntu-latest"
+          },
+          "executionOptions": {
+            "type": 0
+          },
+          "allowScriptsAuthAccessOption": false,
+          "type": 1
+        },
+        "jobAuthorizationScope": 2
+      }
+    ],
+    "target": {
+      "agentSpecification": {
+        "identifier": "ubuntu-latest"
+      }
+    },
+    "type": 1
+  },
+  "repository": {
+    "properties": {
+      "cleanOptions": "0",
+      "labelSources": "0",
+      "labelSourcesFormat": "$(build.buildNumber)",
+      "reportBuildStatus": "true",
+      "fetchDepth": "1",
+      "gitLfsSupport": "false",
+      "skipSyncSource": "false",
+      "checkoutNestedSubmodules": "false"
+    },
+    "id": "0319be90-f9d1-4d62-a53d-ff38baa9d3b7",
+    "type": "TfsGit",
+    "name": "DiscoveryServer.git",
+    "url": "https://dev.azure.com/sirisha9046martham/sirisha9046martham/_git/DiscoveryServer.git",
+    "defaultBranch": "refs/heads/master",
+    "clean": "false",
+    "checkoutSubmodules": false
+  },
+  "processParameters": {},
+  "quality": 1,
+  "authoredBy": {
+    "displayName": "sirisha martham",
+    "url": "https://spsprodcin3.vssps.visualstudio.com/A356e52e8-f490-41a1-8320-41c36ff5a66d/_apis/Identities/f602d7ce-492d-6de3-bc32-41958e5864e6",
+    "_links": {
+      "avatar": {
+        "href": "https://dev.azure.com/sirisha9046martham/_apis/GraphProfile/MemberAvatars/msa.ZjYwMmQ3Y2UtNDkyZC03ZGUzLWJjMzItNDE5NThlNTg2NGU2"
+      }
+    },
+    "id": "f602d7ce-492d-6de3-bc32-41958e5864e6",
+    "uniqueName": "sirisha9046.martham@gmail.com",
+    "imageUrl": "https://dev.azure.com/sirisha9046martham/_apis/GraphProfile/MemberAvatars/msa.ZjYwMmQ3Y2UtNDkyZC03ZGUzLWJjMzItNDE5NThlNTg2NGU2",
+    "descriptor": "msa.ZjYwMmQ3Y2UtNDkyZC03ZGUzLWJjMzItNDE5NThlNTg2NGU2"
+  },
+  "drafts": [],
+  "queue": {
+    "_links": {
+      "self": {
+        "href": "https://dev.azure.com/sirisha9046martham/_apis/build/Queues/9"
+      }
+    },
+    "id": 9,
+    "name": "Azure Pipelines",
+    "url": "https://dev.azure.com/sirisha9046martham/_apis/build/Queues/9",
+    "pool": {
+      "id": 9,
+      "name": "Azure Pipelines",
+      "isHosted": true
+    }
+  },
+  "id": 2,
+  "name": "sirisha9046martham-Docker container-CI",
+  "url": "https://dev.azure.com/sirisha9046martham/04217cd0-9129-4750-afec-d6c703a2bd7c/_apis/build/Definitions/2?revision=7",
+  "uri": "vstfs:///Build/Definition/2",
+  "path": "\\",
+  "type": 2,
+  "queueStatus": 0,
+  "revision": 7,
+  "createdDate": "2026-04-30T05:26:09.313Z",
+  "project": {
+    "id": "04217cd0-9129-4750-afec-d6c703a2bd7c",
+    "name": "sirisha9046martham",
+    "url": "https://dev.azure.com/sirisha9046martham/_apis/projects/04217cd0-9129-4750-afec-d6c703a2bd7c",
+    "state": 1,
+    "revision": 11,
+    "visibility": 0,
+    "lastUpdateTime": "2026-04-28T15:01:11.383Z"
+  }
+}
