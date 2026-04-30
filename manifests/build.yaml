@@ -1,0 +1,34 @@
+pool:
+  name: Azure Pipelines
+  demands: maven
+
+steps:
+- task: Maven@4
+  displayName: 'Maven pom.xml'
+  inputs:
+    azureSubscription: 'Azure subscription 1 (9121b710-22fb-4465-b49b-7b4fcf9a17b5)'
+
+- task: Docker@0
+  displayName: 'Build an image'
+  inputs:
+    azureSubscription: 'Azure subscription 1 (9121b710-22fb-4465-b49b-7b4fcf9a17b5)'
+    azureContainerRegistry: '{"loginServer":"acrr11.azurecr.io", "id" : "/subscriptions/9121b710-22fb-4465-b49b-7b4fcf9a17b5/resourceGroups/resourcegroup-11/providers/Microsoft.ContainerRegistry/registries/acrr11"}'
+    includeLatestTag: true
+
+- task: Docker@0
+  displayName: 'Push an image'
+  inputs:
+    azureSubscription: 'Azure subscription 1 (9121b710-22fb-4465-b49b-7b4fcf9a17b5)'
+    azureContainerRegistry: '{"loginServer":"acrr11.azurecr.io", "id" : "/subscriptions/9121b710-22fb-4465-b49b-7b4fcf9a17b5/resourceGroups/resourcegroup-11/providers/Microsoft.ContainerRegistry/registries/acrr11"}'
+    action: 'Push an image'
+    includeLatestTag: true
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+  inputs:
+    SourceFolder: manifests
+    Contents: '**/*.yaml'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
