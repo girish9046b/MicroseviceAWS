@@ -21,7 +21,7 @@ public class Add {
 	//	       @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value="60")
 	//	    })
 	public int getSum(@PathVariable("a") int a,@PathVariable("b") int b) {
-		System.out.println("...........Add server-111............");
+		System.out.println("...........Add server-111............ ");
 		
 		int sum = a + b ;  //restTemplate.getForObject("http://CLIENT2/maths/sum/"+a+"/"+b, Integer.class);
 		return sum;
