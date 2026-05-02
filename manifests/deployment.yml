@@ -13,8 +13,8 @@ metadata:
   name: read-crds-binding
 subjects:
 - kind: ServiceAccount # Or 'User' based on your error
-  name: SCN-K3
-  namespace: kube-system
+  name: "SCN-K3"
+  namespace: "kube-system"
 roleRef:
   kind: ClusterRole
   name: crd-lister
