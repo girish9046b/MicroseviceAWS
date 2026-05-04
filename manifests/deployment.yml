@@ -18,4 +18,4 @@ spec:
           image: acrresource1.azurecr.io/discoveryserver.git:latest
           ports:
           - containerPort: 80
- 
+  
