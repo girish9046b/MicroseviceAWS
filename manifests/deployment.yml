@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: discovery 
-          image: acr33.azurecr.io/discoveryserver.git:latest
+          image: acrresource1.azurecr.io/discoveryserver.git:latest
           ports:
           - containerPort: 80
  
