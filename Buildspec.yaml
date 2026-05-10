@@ -1,5 +1,4 @@
 version: 0.2
-
 phases:
 	#pre_build to connect to ECR
   pre_build:
