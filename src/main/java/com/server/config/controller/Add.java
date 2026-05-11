@@ -23,7 +23,7 @@ public class Add {
 	public int getSum(@PathVariable("a") int a,@PathVariable("b") int b) {
 		System.out.println("...........Add server-1111111111111.2223 3 ........... ");
 		
-		int sum = a + b + 10 ;  //restTemplate.getForObject("http://CLIENT2/maths/sum/"+a+"/"+b, Integer.class);
+		int sum = a + b + 20 ;  //restTemplate.getForObject("http://CLIENT2/maths/sum/"+a+"/"+b, Integer.class);
 		return sum;
 	}
 	
