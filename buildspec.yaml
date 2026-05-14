@@ -6,7 +6,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - >-
-        REPOSITORY_URI=817715292371.dkr.ecr.ap-south-1.amazonaws.com/resort-ecr
+        REPOSITORY_URI=public.ecr.aws/j9e0o4h4/resort-ecr
       - >-
         aws ecr get-login-password --region ap-south-1 | docker login --username
         AWS --password-stdin $REPOSITORY_URI
